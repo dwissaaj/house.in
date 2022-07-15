@@ -8,6 +8,7 @@ import Shop from './Pages/Shop'
 import Navbar from './Components/NavBar';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
+import Footer from './Components/Footer';
 function App() {
   return (
     <>
@@ -21,6 +22,7 @@ function App() {
       <Route path='login' element={<Login/>}/>
       <Route path='register' element={<Register/>} />
     </Routes>
+    <Footer/>
     </>
   );
 }

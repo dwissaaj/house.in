@@ -10,13 +10,24 @@ export const theme = createTheme({
         secondary:{
             main:"#898AA6",
             light:"#7173A8"
+        },
+        error:{
+            main:"#FF7878"
+        },
+        success:{
+            main:"#90C8AC"
         }
+
     },
     typography:{
         h3:{
             fontSize:20,
             fontWeight:"bold",
             fontFamily: '"Baloo Bhaijaan", cursive',
+        },
+        h6:{
+            fontSize:15,
+            fontFamily: "Baloo Bhaijaan",
         }
     }
     
