@@ -1,6 +1,22 @@
+import { useNavigate } from "react-router";
+import { useAuth } from "../config/Auth";
+
 const Profile = () => {
+    const auth = useAuth()
+    const navigate = useNavigate()
+
+
+    const handleLogout = () => {
+        auth.logout()
+        navigate('/')
+    }
     return ( 
-        <h2>Profile</h2>
+        <>
+        <div>
+            welcome {auth.user}
+        </div>
+        <button oncClick={handleLogout}>Logout</button>
+        </>
      );
 }
  

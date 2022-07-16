@@ -9,21 +9,23 @@ import Navbar from './Components/NavBar';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Footer from './Components/Footer';
+import { AuthProvider } from './config/Auth';
+import Require from './config/Require';
 function App() {
   return (
-    <>
+    <AuthProvider>
     <Navbar/>
     <Routes>
       <Route path='/' element={<LandingPage/>}/>
       <Route path='hire-me' element={<HireMe/>}/>
       <Route path='shop' element={<Shop/>}/>
       <Route path='report' element={<Report/>}/>
-      <Route path='profile' element={<Profile/>}/>
+      <Route path='profile' element={<Require><Profile/></Require>}/>
       <Route path='login' element={<Login/>}/>
       <Route path='register' element={<Register/>} />
     </Routes>
     <Footer/>
-    </>
+    </AuthProvider>
   );
 }
 

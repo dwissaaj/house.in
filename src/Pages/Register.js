@@ -1,9 +1,9 @@
-import { Button, Typography, Grid,Box,Input ,InputLabel, TextField } from '@mui/material'
+import { Button, Typography, Grid,Box, TextField } from '@mui/material'
 import { Container} from '@mui/system'
 import { useFormik} from 'formik'
-import React, {useState} from 'react'
-import { Link, Navigate } from 'react-router-dom'
-import Login from './Login'
+import React, {useEffect, useState} from 'react'
+import { Cookies } from 'react-cookie'
+import { Link, useNavigate } from 'react-router-dom'
 const initialValues = {
   username:'',
   email:'',
@@ -24,12 +24,22 @@ const validate = values => {
   }
   return errors
 }
-function Register() {
+function Register({cookies}) {
   const [success, setSuccess] = useState(false);
   const [registerPass,setRegisterPass] = useState(false);
   const [registerUser,setRegisterUser] = useState(false);
   const [registerEmail,setRegisterEmail] = useState(false);
   const [registerAllError,setRegisterAllError] = useState(false);
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const checkCookie = () => {
+      if (cookies.token) {
+        return navigate('/')
+      }
+    }
+    checkCookie()
+  })
   const formik = useFormik({
     initialValues,
     onSubmit: async values  => {
@@ -71,7 +81,7 @@ function Register() {
                 alignItems="center"
                 justifyContent="center"
                 sx={{margin:"auto",backgroundColor:'#898AA6',height:'auto',width:'350px',
-                marginTop:"40px",marginBottom:"20px",padding:'50px',borderRadius:'20px'}}>
+                marginTop:"40px",marginBottom:"100px",padding:'50px',borderRadius:'20px'}}>
                 <form onSubmit={formik.handleSubmit}>       
                 {success && (
                   <div>
