@@ -11,7 +11,9 @@ import Register from './Pages/Register';
 import Footer from './Components/Footer';
 import { AuthProvider } from './config/Auth';
 import Require from './config/Require';
+import { useCookies } from "react-cookie";
 function App() {
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   return (
     <AuthProvider>
     <Navbar/>
@@ -21,8 +23,8 @@ function App() {
       <Route path='shop' element={<Shop/>}/>
       <Route path='report' element={<Report/>}/>
       <Route path='profile' element={<Require><Profile/></Require>}/>
-      <Route path='login' element={<Login/>}/>
-      <Route path='register' element={<Register/>} />
+      <Route path='login' element={<Login setCookie={setCookie}/>} />
+      <Route path='register' element={<Register cookies={setCookie} /> } />
     </Routes>
     <Footer/>
     </AuthProvider>

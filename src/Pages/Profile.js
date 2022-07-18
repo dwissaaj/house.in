@@ -15,7 +15,7 @@ const Profile = () => {
         <div>
             welcome {auth.user}
         </div>
-        <button oncClick={handleLogout}>Logout</button>
+        <button onClick={handleLogout}>Logout</button>
         </>
      );
 }

@@ -71,7 +71,7 @@ function Register({cookies}) {
     },
     validate
   })
-  console.log(formik)
+  
   return (
     <>
         <Container>

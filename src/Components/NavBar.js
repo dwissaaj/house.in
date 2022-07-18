@@ -60,13 +60,16 @@ const Navbar = () => {
                 </Container>
                 <Box sx={{width:'500px', display: { xs: 'block' , sm: 'block' } }}>
                         {!auth.user && (
-                            <NavLink style={NavLinkLogin} to='/login'>
-                                <BlueButton >Login</BlueButton>
-                            </NavLink> 
-                        )}
-                        <NavLink style={NavLinkLogin} to='/register'>
-                            <BlueButton >Register</BlueButton>
+                            <div>
+                                <NavLink style={NavLinkLogin} to='/login'>
+                            <BlueButton >Login</BlueButton>
                         </NavLink> 
+                        <NavLink style={NavLinkLogin} to='/register'>
+                        <BlueButton >Register</BlueButton>
+                        </NavLink> 
+                            </div>
+                        )}
+                        
                 </Box>
                 </Toolbar>
             </AppBar>
