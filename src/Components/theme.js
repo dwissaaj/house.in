@@ -16,6 +16,12 @@ export const theme = createTheme({
         },
         success:{
             main:"#90C8AC"
+        },
+        grey:{
+            main:'#DBDBDB'
+        },
+        whitegrey: {
+            main: '#F1EFEF'
         }
 
     },
@@ -28,6 +34,10 @@ export const theme = createTheme({
         h6:{
             fontSize:15,
             fontFamily: "Baloo Bhaijaan",
+        },
+        subtitle1: {
+            fontSize:20,
+            fontFamily:'Baloo Chettan'
         }
     }
     

@@ -1,4 +1,4 @@
-import { Button, Typography, Grid,Box, TextField } from '@mui/material'
+import { Button, Typography, Grid,Box, TextField, Alert } from '@mui/material'
 import { Container} from '@mui/system'
 import { useFormik} from 'formik'
 import React, {useEffect, useState} from 'react'
@@ -32,6 +32,7 @@ function Register({cookies}) {
   const [registerAllError,setRegisterAllError] = useState(false);
   const navigate = useNavigate()
 
+  
   useEffect(() => {
     const checkCookie = () => {
       if (cookies.token) {
@@ -56,7 +57,7 @@ function Register({cookies}) {
       );
       const res = await req.json();
       if(res.jwt){
-        setSuccess(true);      
+        setSuccess(true);   
       }
       else if (res.error.message === 'Email or Username are already taken') {
         setRegisterEmail(true)
@@ -85,9 +86,7 @@ function Register({cookies}) {
                 <form onSubmit={formik.handleSubmit}>       
                 {success && (
                   <div>
-                    <Button variant="contained" color="success">
-                      <Typography>Registered</Typography>
-                    </Button>
+                    <Alert severity='success'>Registered</Alert>
                   </div>
                   )}
                   <Box sx={{marginBottom:"30px",marginTop:'20px'}}>
@@ -135,32 +134,16 @@ function Register({cookies}) {
                   </Box>
                   <Box>
                   {registerUser && (
-                    <Button variant="contained" type="submit" color='error' sx={{marginTop:'10px',marginBottom:'10px'}}>
-                      <Typography sx={{color:'white'}}>
-                        Minimum 3 Character For Username
-                      </Typography>
-                    </Button>
+                    <Alert sx={{marginTop:'5px'}} severity='error'>Minimum 3 Character For Username</Alert>
                     )}
                     {registerEmail && (
-                    <Button variant="contained" type="submit" color='error' sx={{marginTop:'10px',marginBottom:'10px'}}>
-                    <Typography sx={{color:'white'}}>
-                      Email Have Been Registered
-                    </Typography>
-                  </Button>
+                      <Alert sx={{marginTop:'5px'}} severity='error'>Email Have Been Registered</Alert>
                   )}
                     {registerPass && (
-                    <Button variant="contained" type="submit" color='error'sx={{marginTop:'10px',marginBottom:'10px'}}>
-                    <Typography sx={{color:'white'}}>
-                      Password Must Contain At Least 6 Character
-                    </Typography>
-                  </Button>
+                    <Alert sx={{marginTop:'5px'}} severity='error'>Password Must Contain At Least 6 Character</Alert>
                   )}           
                   {registerAllError && (
-                    <Button variant="contained" type="submit" color='error'sx={{marginTop:'10px',marginBottom:'10px'}}>
-                    <Typography sx={{color:'white'}}>
-                      Password Must 6 Character and Username Must At Least 3 Character
-                    </Typography>
-                    </Button>
+                    <Alert sx={{marginTop:'5px'}} severity='error'>Password Must 6 Character and Username Must At Least 3 Character</Alert>
                   )}      
                   </Box>
           </form>

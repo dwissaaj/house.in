@@ -62,11 +62,11 @@ const Navbar = () => {
                         {!auth.user && (
                             <div>
                                 <NavLink style={NavLinkLogin} to='/login'>
-                            <BlueButton >Login</BlueButton>
-                        </NavLink> 
-                        <NavLink style={NavLinkLogin} to='/register'>
-                        <BlueButton >Register</BlueButton>
-                        </NavLink> 
+                                <BlueButton >Login</BlueButton>
+                                </NavLink> 
+                                <NavLink style={NavLinkLogin} to='/register'>
+                                <BlueButton >Register</BlueButton>
+                                </NavLink> 
                             </div>
                         )}
                         
