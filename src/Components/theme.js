@@ -1,4 +1,4 @@
-import { createTheme, styled, Typography } from "@mui/material";
+import { createTheme } from "@mui/material";
 
 
 export const theme = createTheme({
@@ -26,6 +26,16 @@ export const theme = createTheme({
 
     },
     typography:{
+        h1:{
+            fontSize:30,
+            fontWeight:"bold",
+            fontFamily: '"Baloo Bhaijaan", cursive',
+        },
+        h2:{
+            fontSize:20,
+            fontWeight:"bold",
+            fontFamily: "Baloo Bhaijaan",
+        },
         h3:{
             fontSize:20,
             fontWeight:"bold",

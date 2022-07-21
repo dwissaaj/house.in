@@ -1,4 +1,4 @@
-import { Grid,BottomNavigation, Stack, Typography,Container, BottomNavigationAction, AppBar, Toolbar } from '@mui/material'
+import { Grid, Stack, Typography,Container, BottomNavigationAction, AppBar, Toolbar } from '@mui/material'
 import React from 'react'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -9,10 +9,10 @@ function Footer() {
       <Toolbar>
       <Container>
       <Grid>
-          <Typography variant="h6" sx={{marginBottom:'10px',display:'flex',justifyContent:"center"}}>
+          <Typography variant="h2" sx={{marginTop:'5px',marginBottom:'10px',display:'flex',justifyContent:"center"}}>
             Reach Us
           </Typography>
-          <Stack direction='row' spacing={1}>
+          <Stack direction='row' spacing={1} sx={{display:'flex',justifyContent:'center'}}>
           <BottomNavigationAction  icon={<WhatsAppIcon />} />
           <BottomNavigationAction  icon={<LinkedInIcon />} />
           <BottomNavigationAction  icon={<InstagramIcon />} />
