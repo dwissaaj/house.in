@@ -1,16 +1,17 @@
-import { Box, Button, Card, CardActions, CardContent, CardMedia, CircularProgress, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Card, CardActions, CardContent, CardMedia, CircularProgress, Container, Grid, Stack, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useReducer, useState } from "react";
 import b1 from '../assets/b1.jpg'
-const initialState = 0
+import { useFormik } from 'formik';
+const initialState = {
+    stateId : 0
+}
 const reducer = (state,action) => {
-    switch(action) {
+    switch(action.type) {
         case 'show10' :
-            return (state - state) + 10
+            return { stateId : (state.stateId - state.stateId) + 20}
         case 'show20' :
-            return (state - state) + 20
-        case 'show25' :
-            return (state - state) + 25
+            return { stateId : (state.stateId - state.stateId) + 10}
         default:
             return initialState   
         }   
@@ -19,11 +20,19 @@ const reducer = (state,action) => {
 const Shop = () => {
     const [cardRes,setCardRes] = useState([])
     const [loading,setLoading] = useState(true)
-    
+    const [sortState,setSortState] = useState('asc')
+    const [filterName,setFilterName] = useState('')
     const [count,dispatch] = useReducer(reducer,initialState)
-
+    const formik = useFormik({
+        initialValues: {
+          search: '',
+        },
+        onSubmit: values => {
+          setFilterName(Object.values(values))
+        },
+      });
     useEffect(() => {
-        axios.get(`http://localhost:1337/api/products?populate=*&filters[id][$gt]=${count}`)
+        axios.get(`http://localhost:1337/api/products?populate=*&filters[id][$gt]=${count.stateId}&sort[0]=price%3A${sortState}&filters[productName][$containsi]=${filterName}`)
         .then(res => {
             setLoading(false)
             setCardRes(res.data.data)
@@ -34,26 +43,46 @@ const Shop = () => {
             setLoading(true)
         })
         
-    },[count])
+    },[count,sortState,filterName])
     console.log(cardRes);
+
+    
     return ( 
         <Container sx={{marginTop:'50px'}}>
             
             <Box sx={{marginLeft:'50px'}}>
                 <Typography variant="h1" sx={{marginBottom:'20px'}}>Make Your Home Better</Typography>
-                <Stack direction='row' spacing={2} >
-                    <Button variant='outlined' color='info' onClick={() => dispatch('show10')}>10</Button>
-                    <Button variant='outlined' color='info' onClick={() => dispatch('show20')}>20</Button>
+                <Typography variant="subtitle1" sx={{marginBottom:'20px'}}>Filter</Typography>
+                <Stack sx={{marginBottom:'10px'}} direction='row' spacing={2} >
+                    <Button variant='outlined' color='info' onClick={() => dispatch({type: 'show10'})}>10</Button>
+                    <Button variant='outlined' color='info' onClick={() => dispatch({type: 'show20'})}>20</Button>
                 </Stack>
-                <div>Count - {count}</div>
+                <Stack direction='row' spacing={2} >
+                    <Button variant='outlined' color='info' onClick={() => setSortState('asc')}>Low To High</Button>
+                    <Button variant='outlined' color='info' onClick={() => setSortState('desc')}>High To Low</Button>
+                </Stack>
+                <form onSubmit={formik.handleSubmit}>
+                    <Box sx={{marginTop:'10px',marginBottom:'30px'}}>
+                    <TextField
+                        id="search"
+                        name="search"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.search}
+                        sx={{width:'300px',height:'5px'}}
+                    />
+                    <Button sx={{marginLeft:'20px'}} variant="contained" type="submit" color='primary'>Search</Button>
+                    </Box>
+                </form>
             </Box>
            
             <Grid container 
                     rowSpacing={2}
                     direction="row"
                     alignItems="center"
-                    justifyContent="space-between" sx={{display:'flex'}}>
-
+                    justifyContent="start" sx={{display:'flex'}}
+                    columnGap={2}>
+                    
                     { loading ? <CircularProgress color="inherit">Loading</CircularProgress> : null}
             {
                 cardRes.map((products) => {
@@ -75,7 +104,6 @@ const Shop = () => {
                     )
                 })
             }
-            <p>{JSON.stringify(cardRes.length)}</p>
             </Grid>
             
         </Container>
