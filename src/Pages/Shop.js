@@ -1,17 +1,18 @@
-import { Box, Button, Card, CardActions, CardContent, CardMedia, CircularProgress, Container, Grid, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Container, Grid, Stack, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useReducer, useState } from "react";
-import b1 from '../assets/b1.jpg'
 import { useFormik } from 'formik';
+import ProductCard from "../Components/ProductCard";
+import { config } from "../utils/Constants";
 const initialState = {
-    stateId : 0
+    stateId : 10
 }
 const reducer = (state,action) => {
     switch(action.type) {
         case 'show10' :
-            return { stateId : (state.stateId - state.stateId) + 20}
+            return { stateId : (state.stateId - state.stateId) + 15}
         case 'show20' :
-            return { stateId : (state.stateId - state.stateId) + 10}
+            return { stateId : (state.stateId - state.stateId) + 25}
         default:
             return initialState   
         }   
@@ -22,6 +23,7 @@ const Shop = () => {
     const [loading,setLoading] = useState(true)
     const [sortState,setSortState] = useState('asc')
     const [filterName,setFilterName] = useState('')
+    const url = config.url.STRAPI_URL
     const [count,dispatch] = useReducer(reducer,initialState)
     const formik = useFormik({
         initialValues: {
@@ -32,7 +34,7 @@ const Shop = () => {
         },
       });
     useEffect(() => {
-        axios.get(`http://localhost:1337/api/products?populate=*&filters[id][$gt]=${count.stateId}&sort[0]=price%3A${sortState}&filters[productName][$containsi]=${filterName}`)
+        axios.get(`${url}/api/products?populate=*&pagination[pageSize]=${count.stateId}&sort[0]=price%3A${sortState}&filters[productName][$containsi]=${filterName}`)
         .then(res => {
             setLoading(false)
             setCardRes(res.data.data)
@@ -54,7 +56,7 @@ const Shop = () => {
                 <Typography variant="h1" sx={{marginBottom:'20px'}}>Make Your Home Better</Typography>
                 <Typography variant="subtitle1" sx={{marginBottom:'20px'}}>Filter</Typography>
                 <Stack sx={{marginBottom:'10px'}} direction='row' spacing={2} >
-                    <Button variant='outlined' color='info' onClick={() => dispatch({type: 'show10'})}>10</Button>
+                    <Button variant='outlined' color='info' onClick={() => dispatch({type: 'show10'})}>15</Button>
                     <Button variant='outlined' color='info' onClick={() => dispatch({type: 'show20'})}>20</Button>
                 </Stack>
                 <Stack direction='row' spacing={2} >
@@ -88,19 +90,11 @@ const Shop = () => {
                 cardRes.map((products) => {
                     return  (
                     
-                        <Grid direction='row' sx={{marginTop:'40px'}}>
-                        <Card sx={{maxWidth:200,backgroundColor:'grey.main',paddingBottom:'10px'}}>
-                        <CardMedia component='img' image={b1} sx={{objectFit:'contain',maxHeight:'100%',maxWidth:'100%'}} />
-                        <CardContent>
-                            <Typography variant="subtitle1">{products.attributes.productName}</Typography>
-                            <Typography variant="subtitle1">{products.attributes.price}</Typography>
-                            <Typography variant="subtitle1">{products.attributes.location}</Typography>
-                        </CardContent>
-                        <CardActions sx={{display:'flex',justifyContent:'center'}}>
-                            <Button  variant='contained' color="primary" disabled>Add To Cart</Button>
-                        </CardActions>
-                        </Card>
-                        </Grid>
+                        <ProductCard
+                        productName={products.attributes.productName}
+                        price={products.attributes.price}
+                        location={products.attributes.location} key={products.id} data={products}/>
+
                     )
                 })
             }

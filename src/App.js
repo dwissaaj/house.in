@@ -12,6 +12,7 @@ import Footer from './Components/Footer';
 import { AuthProvider } from './config/Auth';
 import Require from './config/Require';
 import { useCookies } from "react-cookie";
+
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   return (
