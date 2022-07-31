@@ -12,6 +12,8 @@ import Footer from './Components/Footer';
 import { AuthProvider } from './config/Auth';
 import Require from './config/Require';
 import { useCookies } from "react-cookie";
+import SingleProducts from './Components/SingleProducts';
+import ProductCard from './Components/ProductCard';
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
@@ -22,12 +24,12 @@ function App() {
       <Route path='/' element={<LandingPage/>}/>
       <Route path='hire-me' element={<HireMe/>}/>
       <Route path='shop' element={<Shop/>}/>
+      <Route path='shop/products/:id' element={<SingleProducts/>}/>
       <Route path='report' element={<Report/>}/>
       <Route path='profile' element={<Require><Profile/></Require>}/>
       <Route path='login' element={<Login setCookie={setCookie}/>} />
       <Route path='register' element={<Register cookies={setCookie} /> } />
     </Routes>
-    <Footer/>
     </AuthProvider>
   );
 }

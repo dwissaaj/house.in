@@ -4,6 +4,7 @@ import { useEffect, useReducer, useState } from "react";
 import { useFormik } from 'formik';
 import ProductCard from "../Components/ProductCard";
 import { config } from "../utils/Constants";
+import { Link, Outlet } from "react-router-dom";
 const initialState = {
     stateId : 10
 }
@@ -51,7 +52,6 @@ const Shop = () => {
     
     return ( 
         <Container sx={{marginTop:'50px'}}>
-            
             <Box sx={{marginLeft:'50px'}}>
                 <Typography variant="h1" sx={{marginBottom:'20px'}}>Make Your Home Better</Typography>
                 <Typography variant="subtitle1" sx={{marginBottom:'20px'}}>Filter</Typography>
@@ -80,7 +80,6 @@ const Shop = () => {
            
             <Grid container 
                     rowSpacing={2}
-                    direction="row"
                     alignItems="center"
                     justifyContent="start" sx={{display:'flex'}}
                     columnGap={2}>
@@ -89,12 +88,16 @@ const Shop = () => {
             {
                 cardRes.map((products) => {
                     return  (
-                    
+                
+                       <>
                         <ProductCard
+                        image={products.attributes.imageUrl}
+                        linkLoc={products.id}
                         productName={products.attributes.productName}
                         price={products.attributes.price}
-                        location={products.attributes.location} key={products.id} data={products}/>
-
+                        location={products.attributes.location} key={products.id} />
+                        </>
+                    
                     )
                 })
             }
