@@ -25,6 +25,7 @@ function App() {
       <Route path='hire-me' element={<HireMe/>}/>
       <Route path='shop' element={<Shop/>}/>
       <Route path='shop/products/:id' element={<SingleProducts/>}/>
+      <Route path='products/:id' element={<SingleProducts/>}/>
       <Route path='report' element={<Report/>}/>
       <Route path='profile' element={<Require><Profile/></Require>}/>
       <Route path='login' element={<Login setCookie={setCookie}/>} />

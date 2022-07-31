@@ -1,24 +1,28 @@
 import { Container, Grid, ImageListItem, Typography,Box } from '@mui/material'
 import React from 'react'
-import { useLocation } from 'react-router'
+import { useLocation, useParams } from 'react-router'
 
 const SingleProducts = () => {
   const location = useLocation()
+  const params = useParams()
+  const productId = params.productId
   const state = location.state
   console.log(state)
   return (
     <Container>
+      <Typography sx={{fontSize:'50px'}} variant='h2'>Product Detail</Typography>
         <Grid container
         spacing={0}
-        direction="column"
+        direction="row"
         alignItems="center"
-        justifyContent="center">
-          <Grid item xs={6}>
-            <Typography>{state.productName}</Typography>
-            <Typography>{state.price}</Typography>
+        justifyContent="center" sx={{marginTop:'20px'}}>
+          
+          <Grid item xs={6}  >
+            <img style={{marginLeft:'10px',width:'300px',height:'300px',objectFit:'contain'}} src={state.image} alt="" />
           </Grid>
-          <Grid item xs={6}>
-            <img style={{width:'100px'}} src={state.image} alt="" />
+          <Grid item xs={6} >
+            <Typography sx={{fontSize:'50px'}} variant='h2'>{state.productName}</Typography>
+            <Typography sx={{fontSize:'30px'}} variant='h2'>{state.price}</Typography>
           </Grid>
         </Grid>
     </Container>

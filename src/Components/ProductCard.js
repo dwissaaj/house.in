@@ -15,7 +15,7 @@ const ProductCard = (props) => {
                   <Typography variant="subtitle1">{props.location}</Typography>
                     </CardContent>
                   <CardActions sx={{display:'flex',justifyContent:'center'}}>
-                    <Link to={`products/${props.linkLoc}`} state={props}>
+                    <Link style={{textDecoration:'none'}} to={`products/${props.linkLoc}`} state={props}>
                       <Button  variant='contained' color="primary" >Check Detail</Button>
                     </Link>
                   </CardActions>

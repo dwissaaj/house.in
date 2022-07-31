@@ -94,6 +94,8 @@ const Introduction = () => {
                 cardRes.map((products) => {
                     return  (
                         <ProductCard
+                         image={products.attributes.imageUrl}
+                        linkLoc={products.id}
                         productName={products.attributes.productName}
                         price={products.attributes.price}
                         location={products.attributes.location} key={products.id}/>
