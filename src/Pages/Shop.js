@@ -4,15 +4,15 @@ import { useEffect, useReducer, useState } from "react";
 import { useFormik } from 'formik';
 import ProductCard from "../Components/ProductCard";
 import { config } from "../utils/Constants";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useSearchParams , useLocation} from "react-router-dom";
 const initialState = {
     stateId : 10
 }
 const reducer = (state,action) => {
     switch(action.type) {
-        case 'show10' :
+        case 'show15' :
             return { stateId : (state.stateId - state.stateId) + 15}
-        case 'show20' :
+        case 'show25' :
             return { stateId : (state.stateId - state.stateId) + 25}
         default:
             return initialState   
@@ -22,6 +22,8 @@ const reducer = (state,action) => {
 const Shop = () => {
     const [cardRes,setCardRes] = useState([])
     const [loading,setLoading] = useState(true)
+    const [searchParams,setSearchParams] = useSearchParams()
+    const filtering = searchParams.get('filter') || '';
     const [sortState,setSortState] = useState('asc')
     const [filterName,setFilterName] = useState('')
     const url = config.url.STRAPI_URL
@@ -32,6 +34,7 @@ const Shop = () => {
         },
         onSubmit: values => {
           setFilterName(Object.values(values))
+          setSearchParams({"search":Object.values(values)})
         },
       });
     useEffect(() => {
@@ -49,6 +52,26 @@ const Shop = () => {
     },[count,sortState,filterName])
     console.log(cardRes);
 
+    const get15 = () => {
+        dispatch({type: 'show15'})
+        setSearchParams({filter:'15'})
+    
+    }
+    const get25 = () => {
+        dispatch({type: 'show25'})
+        setSearchParams({filter:'15'})
+    
+    }
+    const lowToHigh = () => {
+        setSortState('asc')
+        setSearchParams({sorting:'lowest'})
+    
+    }
+    const highToLow = () => {
+        setSortState('desc')
+        setSearchParams({sorting:'highest'})
+    
+    }
     
     return ( 
         <Container sx={{marginTop:'50px'}}>
@@ -56,12 +79,12 @@ const Shop = () => {
                 <Typography variant="h1" sx={{marginBottom:'20px'}}>Make Your Home Better</Typography>
                 <Typography variant="subtitle1" sx={{marginBottom:'20px'}}>Filter</Typography>
                 <Stack sx={{marginBottom:'10px'}} direction='row' spacing={2} >
-                    <Button variant='outlined' color='info' onClick={() => dispatch({type: 'show10'})}>15</Button>
-                    <Button variant='outlined' color='info' onClick={() => dispatch({type: 'show20'})}>20</Button>
+                    <Button variant='outlined' color='info' onClick={get15}>15</Button>
+                    <Button variant='outlined' color='info' onClick={get25}>25</Button>
                 </Stack>
                 <Stack direction='row' spacing={2} >
-                    <Button variant='outlined' color='info' onClick={() => setSortState('asc')}>Low To High</Button>
-                    <Button variant='outlined' color='info' onClick={() => setSortState('desc')}>High To Low</Button>
+                    <Button variant='outlined' color='info' onClick={lowToHigh}>Low To High</Button>
+                    <Button variant='outlined' color='info' onClick={highToLow}>High To Low</Button>
                 </Stack>
                 <form onSubmit={formik.handleSubmit}>
                     <Box sx={{marginTop:'10px',marginBottom:'30px'}}>
