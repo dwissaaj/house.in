@@ -4,7 +4,7 @@ import { useEffect, useReducer, useState } from "react";
 import { useFormik } from 'formik';
 import ProductCard from "../Components/ProductCard";
 import { config } from "../utils/Constants";
-import { Link, Outlet, useSearchParams , useLocation} from "react-router-dom";
+import { useSearchParams , useNavigate} from "react-router-dom";
 const initialState = {
     stateId : 10
 }
@@ -14,6 +14,8 @@ const reducer = (state,action) => {
             return { stateId : (state.stateId - state.stateId) + 15}
         case 'show25' :
             return { stateId : (state.stateId - state.stateId) + 25}
+        case 'reset': 
+            return { initialState }
         default:
             return initialState   
         }   
@@ -22,8 +24,8 @@ const reducer = (state,action) => {
 const Shop = () => {
     const [cardRes,setCardRes] = useState([])
     const [loading,setLoading] = useState(true)
+    const navigate = useNavigate()
     const [searchParams,setSearchParams] = useSearchParams()
-    const filtering = searchParams.get('filter') || '';
     const [sortState,setSortState] = useState('asc')
     const [filterName,setFilterName] = useState('')
     const url = config.url.STRAPI_URL
@@ -72,6 +74,10 @@ const Shop = () => {
         setSearchParams({sorting:'highest'})
     
     }
+    const resetSearch = () => {
+        navigate('/shop')
+        window.location.reload()
+    }
     
     return ( 
         <Container sx={{marginTop:'50px'}}>
@@ -97,6 +103,7 @@ const Shop = () => {
                         sx={{width:'300px',height:'5px'}}
                     />
                     <Button sx={{marginLeft:'20px'}} variant="contained" type="submit" color='primary'>Search</Button>
+                    <Button sx={{marginLeft:'20px'}} variant="contained" onClick={resetSearch} color='primary'>Reset</Button>
                     </Box>
                 </form>
             </Box>

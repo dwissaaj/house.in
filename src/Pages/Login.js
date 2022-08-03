@@ -1,17 +1,16 @@
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useState,useEffect } from "react";
+import { useNavigate } from "react-router";
 import { useAuth } from "../config/Auth";
 import { useFormik } from 'formik';
 import axios from 'axios'
-import { Container,Button, Typography, Grid,Box, TextField, Alert } from '@mui/material'
-const Login = ({setCookie}) => {
-    const [user,setUser] = useState('')
+import { Container,Button, Grid,Box, TextField, Alert } from '@mui/material'
+import GetCookie from "../config/getCookie";
+import setCookie from "../config/setCookie";
+const Login = () => {
+    const [user,setUser] = useState(true)
     const navigate = useNavigate()
     const auth = useAuth()
-    const location = useLocation()
     const [invalidpassword, setInvalidPassword] = useState(false)
-    const redirectPath = location.state?.path || '/'
-    const [loading, setLoading] = useState(false);
 
     const formik = useFormik({
       initialValues: {
@@ -28,9 +27,10 @@ const Login = ({setCookie}) => {
         )
         .then(req => {
           auth.login(req.data.user.username)
-          setCookie("token",req.data.jwt,{path:"/"})
+          setCookie('jwt',req.data.jwt)
+          window.localStorage.setItem("isLoggedIn",JSON.stringify(user))
           navigate("/")
-          console.log(req)
+
         })
         .catch(err => {
           console.log(err)
@@ -40,8 +40,7 @@ const Login = ({setCookie}) => {
              
       },
     });
-
-
+    
 
     return ( 
         <Container>

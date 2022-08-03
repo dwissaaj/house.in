@@ -1,16 +1,23 @@
-import React from 'react'
-import { Navigate, useLocation } from 'react-router'
+import React, { useEffect } from 'react'
+import { Navigate, useLocation, useNavigate } from 'react-router'
 import { useAuth } from './Auth'
 
 const Require = ({children}) => {
   const auth = useAuth()
   const location = useLocation()
-  if(!auth.user) {
-    return <Navigate to='/login' state={{path: location.pathname}}/>  
-  }
+  const navigate = useNavigate()
+  const data = window.localStorage.getItem("isLoggedIn")
+  useEffect(() => {
+    if(data === "true" || auth.user){
+      navigate('/profile')
+    } else {
+      navigate('/login')
+    }
+  },[])
   return (
-    children
+   children
   )
 }
 
 export default Require
+///state={{path: location.pathname}}

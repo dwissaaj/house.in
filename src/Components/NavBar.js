@@ -59,7 +59,7 @@ const Navbar = () => {
                     </Stack>
                 </Container>
                 <Box sx={{width:'500px', display: { xs: 'block' , sm: 'block' } }}>
-                        {!auth.user && (
+                        {!window.localStorage.getItem("isLoggedIn") && (
                             <div>
                                 <NavLink style={NavLinkLogin} to='/login'>
                                 <BlueButton >Login</BlueButton>

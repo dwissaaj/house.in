@@ -4,6 +4,8 @@ import { useFormik} from 'formik'
 import React, {useEffect, useState} from 'react'
 import { Cookies } from 'react-cookie'
 import { Link, useNavigate } from 'react-router-dom'
+import GetCookie from '../config/getCookie'
+import setCookie from '../config/setCookie'
 const initialValues = {
   username:'',
   email:'',
@@ -24,23 +26,15 @@ const validate = values => {
   }
   return errors
 }
-function Register({cookies}) {
+function Register() {
   const [success, setSuccess] = useState(false);
   const [registerPass,setRegisterPass] = useState(false);
   const [registerUser,setRegisterUser] = useState(false);
   const [registerEmail,setRegisterEmail] = useState(false);
   const [registerAllError,setRegisterAllError] = useState(false);
   const navigate = useNavigate()
+  const testcookie = GetCookie()
 
-  
-  useEffect(() => {
-    const checkCookie = () => {
-      if (cookies.token) {
-        return navigate('/')
-      }
-    }
-    checkCookie()
-  })
   const formik = useFormik({
     initialValues,
     onSubmit: async values  => {
@@ -57,7 +51,8 @@ function Register({cookies}) {
       );
       const res = await req.json();
       if(res.jwt){
-        setSuccess(true);   
+        setCookie('jwt',res.jwt)
+        setSuccess(true);
       }
       else if (res.error.message === 'Email or Username are already taken') {
         setRegisterEmail(true)
