@@ -1,13 +1,12 @@
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../config/Auth";
 import { useFormik } from 'formik';
 import axios from 'axios'
 import { Container,Button, Grid,Box, TextField, Alert } from '@mui/material'
-import GetCookie from "../config/getCookie";
 import setCookie from "../config/setCookie";
 const Login = () => {
-    const [user,setUser] = useState(true)
+    const [user] = useState(true)
     const navigate = useNavigate()
     const auth = useAuth()
     const [invalidpassword, setInvalidPassword] = useState(false)
@@ -18,7 +17,7 @@ const Login = () => {
         password: '',
       },
       onSubmit: async values => {
-        const req = await axios.post(
+        await axios.post(
           "http://localhost:1337/api/auth/local",
           {
             identifier : values.email,

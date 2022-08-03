@@ -2,7 +2,6 @@ import { styled,Button,Typography,AppBar,Stack,Toolbar  } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import { NavLink} from 'react-router-dom'
 import housein from '../assets/housein.png'
-import { useAuth } from "../config/Auth";
 
 const Navbar = () => {
     const BlueButton = styled(Button)(({theme}) => ({
@@ -25,7 +24,6 @@ const Navbar = () => {
         }
     }
 
-    const auth = useAuth()
     return ( 
         <>
         <Box>
@@ -36,7 +34,7 @@ const Navbar = () => {
                     <Box sx={{display:{xs:'none',sm:'block'}}}>
                     <Stack direction='row' spacing={2} >
                         <Box>
-                            <img width='30px' height='30px' src={housein}/>
+                            <img width='30px' height='30px' alt="banner" src={housein}/>
                         </Box>
 
                         <NavLink style={navLinkStyles} to='/'>

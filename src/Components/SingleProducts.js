@@ -1,11 +1,10 @@
-import { Container, Grid, ImageListItem, Typography,Box } from '@mui/material'
+import { Container, Grid, Typography } from '@mui/material'
 import React from 'react'
-import { useLocation, useParams } from 'react-router'
+import { useLocation } from 'react-router'
 
 const SingleProducts = () => {
   const location = useLocation()
-  const params = useParams()
-  const productId = params.productId
+
   const state = location.state
   console.log(state)
   return (

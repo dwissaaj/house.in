@@ -1,4 +1,4 @@
-import { CircularProgress,Stack,Container, Typography,Grid, Button, Box, ButtonGroup } from "@mui/material";
+import { CircularProgress,Stack,Container, Typography,Grid, Box } from "@mui/material";
 import { useState,useEffect } from "react";
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,7 +8,6 @@ import "swiper/css/navigation";
 import b1 from '../assets/b1.jpg'
 import b2 from '../assets/b2.jpg'
 import b3 from '../assets/b3.jpg'
-import Shop from "../Pages/Shop";
 import ProductCard from "./ProductCard";
 import axios from 'axios'
 import { config } from "../utils/Constants";

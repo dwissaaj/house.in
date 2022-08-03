@@ -25,7 +25,7 @@ const Shop = () => {
     const [cardRes,setCardRes] = useState([])
     const [loading,setLoading] = useState(true)
     const navigate = useNavigate()
-    const [searchParams,setSearchParams] = useSearchParams()
+    const [setSearchParams] = useSearchParams()
     const [sortState,setSortState] = useState('asc')
     const [filterName,setFilterName] = useState('')
     const url = config.url.STRAPI_URL

@@ -1,10 +1,8 @@
 import { Button, Typography, Grid,Box, TextField, Alert } from '@mui/material'
 import { Container} from '@mui/system'
 import { useFormik} from 'formik'
-import React, {useEffect, useState} from 'react'
-import { Cookies } from 'react-cookie'
-import { Link, useNavigate } from 'react-router-dom'
-import GetCookie from '../config/getCookie'
+import React, {useState} from 'react'
+import { Link } from 'react-router-dom'
 import setCookie from '../config/setCookie'
 const initialValues = {
   username:'',
@@ -32,9 +30,6 @@ function Register() {
   const [registerUser,setRegisterUser] = useState(false);
   const [registerEmail,setRegisterEmail] = useState(false);
   const [registerAllError,setRegisterAllError] = useState(false);
-  const navigate = useNavigate()
-  const testcookie = GetCookie()
-
   const formik = useFormik({
     initialValues,
     onSubmit: async values  => {

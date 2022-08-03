@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { useAuth } from "../../config/Auth";
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import removeCookie from "../../config/removeCookie";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
@@ -13,6 +13,7 @@ const Profile = () => {
         auth.logout()
         removeCookie('jwt')
         navigate('/')
+        window.location.reload()
     }
     
     return ( 

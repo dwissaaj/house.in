@@ -1,7 +1,6 @@
 import React from 'react'
 import {Card, CardActions, CardContent, CardMedia, Button, Typography,Grid} from  "@mui/material";
-import b1 from '../assets/b1.jpg'
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 const ProductCard = (props) => {
   
   return (
