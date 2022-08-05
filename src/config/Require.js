@@ -7,9 +7,7 @@ const Require = ({children}) => {
   const navigate = useNavigate()
   const data = window.localStorage.getItem("isLoggedIn")
   useEffect(() => {
-    if(data === "true" || auth.user){
-      navigate('/profile')
-    } else {
+    if(data === null){
       navigate('/login')
     }
   },[])
