@@ -1,7 +1,7 @@
 import Cookie from 'js-cookie'
 
-const setCookie = (cookiesname,jwt) => {
-  Cookie.set(cookiesname,jwt,{
+const setCookie = (cookiesname,value) => {
+  Cookie.set(cookiesname,value,{
     expires : 30,
     sameSite:'strict',
     path:'/'

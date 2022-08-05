@@ -27,9 +27,9 @@ const Login = () => {
         .then(req => {
           auth.login(req.data.user.username)
           setCookie('jwt',req.data.jwt)
+          setCookie('email',req.data.user.email)
           window.localStorage.setItem("isLoggedIn",JSON.stringify(user))
           navigate("/")
-
         })
         .catch(err => {
           console.log(err)

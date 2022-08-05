@@ -14,6 +14,7 @@ import SingleProducts from './Components/SingleProducts';
 import Information from './Pages/Profile/Information';
 import MyOrder from './Pages/Profile/MyOrder';
 import Wishlist from './Pages/Profile/Wishlist';
+import Edit from './Pages/Profile/Edit';
 
 
 
@@ -30,7 +31,9 @@ function App() {
       <Route path='products/:id' element={<SingleProducts/>}/>
       <Route path='report' element={<Report/>}/>
       <Route path='profile' element={<Require><Profile/></Require>}>
-        <Route index path='personalInfo' element={<Require><Information/></Require>}/>
+        <Route path='personalInfo' element={<Require><Information/></Require>}>
+          <Route path='edit' element={<Require><Edit/></Require>} />
+        </Route>
         <Route path='wishlist' element={<Require><Wishlist/></Require>}/>
         <Route path='my-order' element={<Require><MyOrder/></Require>}/>
       </Route>
