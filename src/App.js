@@ -15,12 +15,14 @@ import Information from './Pages/Profile/Information';
 import MyOrder from './Pages/Profile/MyOrder';
 import Wishlist from './Pages/Profile/Wishlist';
 import Edit from './Pages/Profile/Edit';
+import { QueryClientProvider, QueryClient} from '@tanstack/react-query'
 
-
+const queryClient = new QueryClient()
 
 function App() {
 
   return (
+    <QueryClientProvider client={queryClient}>
     <AuthProvider>
     <Navbar/>
     <Routes>
@@ -41,6 +43,7 @@ function App() {
       <Route path='register' element={<Register  /> } />
     </Routes>
     </AuthProvider>
+    </QueryClientProvider>
   );
 }
 

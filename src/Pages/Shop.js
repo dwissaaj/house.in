@@ -44,6 +44,7 @@ const Shop = () => {
         .then(res => {
             setLoading(false)
             setCardRes(res.data.data)
+            console.log(res.data.data)
             console.log(Array.isArray(cardRes))
         })     
         .catch(err => {
@@ -52,7 +53,6 @@ const Shop = () => {
         })
         
     },[count,sortState,filterName])
-    console.log(cardRes);
 
     const get15 = () => {
         dispatch({type: 'show15'})
@@ -118,16 +118,12 @@ const Shop = () => {
             {
                 cardRes.map((products) => {
                     return  (
-                
-                       <>
                         <ProductCard
                         image={products.attributes.imageUrl}
                         linkLoc={products.id}
                         productName={products.attributes.productName}
                         price={products.attributes.price}
                         location={products.attributes.location} key={products.id} />
-                        </>
-                    
                     )
                 })
             }

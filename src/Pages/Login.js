@@ -29,6 +29,7 @@ const Login = () => {
           setCookie('jwt',req.data.jwt)
           setCookie('email',req.data.user.email)
           window.localStorage.setItem("isLoggedIn",JSON.stringify(user))
+          window.location.reload()
           navigate("/")
         })
         .catch(err => {
