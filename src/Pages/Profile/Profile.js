@@ -35,12 +35,14 @@ const Profile = () => {
                     <Link style={{textDecoration:'none'}} to='my-order'>
                         <Button>My Order</Button>
                     </Link>
-                    <Button onClick={handleLogout} variant="contained" sx={{backgroundColor: theme.palette.error.dark,position:'fixed',bottom:'0'}}>Logout</Button>
+                    
                 </Box>
 
-        <Outlet/>
+                <Button onClick={handleLogout} variant="contained" sx={{backgroundColor: theme.palette.error.dark,position:'absolute',bottom:'0',marginTop:'200px'}}>Logout</Button>
         </Container>
+        <Outlet/>
         </>
+        
      );
 }
  

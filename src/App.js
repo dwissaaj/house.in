@@ -16,6 +16,7 @@ import MyOrder from './Pages/Profile/MyOrder';
 import Wishlist from './Pages/Profile/Wishlist';
 import Edit from './Pages/Profile/Edit';
 import { QueryClientProvider, QueryClient} from '@tanstack/react-query'
+import AddAddress from './Pages/Profile/AddAddress';
 
 const queryClient = new QueryClient()
 
@@ -34,7 +35,7 @@ function App() {
       <Route path='report' element={<Report/>}/>
       <Route path='profile' element={<Require><Profile/></Require>}>
         <Route path='personalInfo' element={<Require><Information/></Require>}>
-          <Route path='edit' element={<Require><Edit/></Require>} />
+          <Route path='addAddress' element={<Require><AddAddress/></Require>} />
         </Route>
         <Route path='wishlist' element={<Require><Wishlist/></Require>}/>
         <Route path='my-order' element={<Require><MyOrder/></Require>}/>
